@@ -7,86 +7,180 @@
 <style>
   :root {
     color-scheme: light dark;
-  }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 48px 24px 96px;
-    line-height: 1.6;
-    color: #1a1a1a;
-    background: #fff;
+    --bg: #fafafa;
+    --bg-elevated: #ffffff;
+    --text: #14141a;
+    --text-muted: #65656f;
+    --border: #e6e6ea;
+    --accent: #4B45BE;
+    --accent-soft: #eeecfb;
+    --shadow: 0 1px 2px rgba(20,20,26,0.04), 0 8px 24px rgba(20,20,26,0.06);
   }
   @media (prefers-color-scheme: dark) {
-    body { color: #eee; background: #121212; }
-    a { color: #7db8ff; }
-    .card { background: #1e1e1e; border-color: #333; }
+    :root {
+      --bg: #0e0e12;
+      --bg-elevated: #17171d;
+      --text: #f2f2f5;
+      --text-muted: #9c9ca8;
+      --border: #27272f;
+      --accent: #8b85f0;
+      --accent-soft: #1e1c33;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+    }
   }
-  h1 { font-size: 28px; margin-bottom: 4px; }
-  .subtitle { color: #666; margin-top: 0; }
-  @media (prefers-color-scheme: dark) { .subtitle { color: #999; } }
-  h2 { font-size: 18px; margin-top: 40px; }
-  .card {
-    background: #f7f7f8;
-    border: 1px solid #e5e5e5;
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 64px 24px 96px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 36px;
+  }
+  .brand-mark {
+    width: 44px;
+    height: 44px;
     border-radius: 12px;
-    padding: 20px 24px;
-    margin: 24px 0;
+    background: linear-gradient(135deg, var(--accent), #7a75e0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 18px;
+    flex-shrink: 0;
+    box-shadow: var(--shadow);
   }
-  a { color: #4B45BE; text-decoration: none; font-weight: 600; }
+  h1 { font-size: 26px; margin: 0; letter-spacing: -0.02em; }
+  .subtitle { color: var(--text-muted); margin: 2px 0 0; font-size: 15px; }
+  h2 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin: 48px 0 14px;
+    font-weight: 600;
+  }
+  .card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px 24px;
+    box-shadow: var(--shadow);
+  }
+  .contact-card { display: flex; align-items: center; gap: 16px; }
+  .contact-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+  }
+  .contact-card p { margin: 2px 0 0; color: var(--text-muted); font-size: 14px; }
+  a { color: var(--accent); text-decoration: none; font-weight: 600; }
   a:hover { text-decoration: underline; }
-  details {
-    margin: 12px 0;
-    padding: 12px 0;
-    border-bottom: 1px solid #e5e5e5;
+  .faq {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--bg-elevated);
+    box-shadow: var(--shadow);
+    overflow: hidden;
   }
-  @media (prefers-color-scheme: dark) { details { border-color: #333; } }
+  details {
+    border-bottom: 1px solid var(--border);
+  }
+  details:last-child { border-bottom: none; }
   summary {
     font-weight: 600;
     cursor: pointer;
+    padding: 18px 22px;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
   }
-  summary::marker { color: #4B45BE; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: "+";
+    color: var(--accent);
+    font-size: 20px;
+    font-weight: 400;
+    transition: transform 0.15s ease;
+    flex-shrink: 0;
+  }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p {
+    margin: 0;
+    padding: 0 22px 20px;
+    color: var(--text-muted);
+    font-size: 14.5px;
+  }
   footer {
-    margin-top: 64px;
+    margin-top: 56px;
     font-size: 13px;
-    color: #999;
+    color: var(--text-muted);
+    text-align: center;
   }
 </style>
 </head>
 <body>
 
-<h1>Wordiz Support</h1>
-<p class="subtitle">Help and answers for the Wordiz Greek learning app.</p>
+<div class="brand">
+  <div class="brand-mark">W</div>
+  <div>
+    <h1>Wordiz Support</h1>
+    <p class="subtitle">Help and answers for the Wordiz Greek learning app.</p>
+  </div>
+</div>
 
-<div class="card">
-  <strong>Need help?</strong><br>
-  Email us at <a href="mailto:yurik1776@gmail.com">yurik1776@gmail.com</a> and we'll get back to you as soon as we can.
+<div class="card contact-card">
+  <div class="contact-icon">✉</div>
+  <div>
+    <a href="mailto:yuri@yuriktech.com">yuri@yuriktech.com</a>
+    <p>Email us and we'll get back to you as soon as we can.</p>
+  </div>
 </div>
 
 <h2>Frequently Asked Questions</h2>
 
-<details>
-  <summary>Does Wordiz work offline?</summary>
-  <p>Yes. Your vocabulary library is stored locally on your device, so capturing, browsing, and practicing words all work without an internet connection. Some AI-assisted features (like generated exercises or speaking feedback) require a connection.</p>
-</details>
+<div class="faq">
+  <details open>
+    <summary>Does Wordiz work offline?</summary>
+    <p>Yes. Your vocabulary library is stored locally on your device, so capturing, browsing, and practicing words all work without an internet connection. Some AI-assisted features (like generated exercises or speaking feedback) require a connection.</p>
+  </details>
 
-<details>
-  <summary>Is my data private?</summary>
-  <p>Your vocabulary and study data are stored locally on your device by default. If you have questions about a specific feature's data handling, email us and we'll explain exactly what's stored and where.</p>
-</details>
+  <details>
+    <summary>Is my data private?</summary>
+    <p>Your vocabulary and study data are stored locally on your device by default. If you have questions about a specific feature's data handling, email us and we'll explain exactly what's stored and where.</p>
+  </details>
 
-<details>
-  <summary>How do I report a bug or request a feature?</summary>
-  <p>Email <a href="mailto:yurik1776@gmail.com">yurik1776@gmail.com</a> with a description of the issue (screenshots help!) and your device model and iOS/Android version.</p>
-</details>
+  <details>
+    <summary>How do I report a bug or request a feature?</summary>
+    <p>Email us with a description of the issue (screenshots help!) and your device model and iOS/Android version.</p>
+  </details>
 
-<details>
-  <summary>How do I delete my data?</summary>
-  <p>You can delete individual words or your entire library from within the app's settings. If you need help removing data completely, contact us at the email above.</p>
-</details>
+  <details>
+    <summary>How do I delete my data?</summary>
+    <p>You can delete individual words or your entire library from within the app's settings. If you need help removing data completely, contact us at the email above.</p>
+  </details>
+</div>
 
 <footer>
-  Wordiz &middot; <a href="mailto:yurik1776@gmail.com">yurik1776@gmail.com</a>
+  Wordiz &middot; <a href="mailto:yuri@yuriktech.com">yuri@yuriktech.com</a>
 </footer>
 
 </body>
